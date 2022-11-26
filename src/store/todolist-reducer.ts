@@ -67,7 +67,6 @@ export const addNewTask = createAsyncThunk("todolist/addNewTask", (params: { tas
             {
                 taskId: v1(),
                 taskTitle: params.taskTitle,
-                deadline: "Set deadline",
                 taskImage: "image",
                 checked: false
             },
@@ -177,7 +176,7 @@ export type TodolistType = {
 export type TaskType = {
     taskId: string;
     taskTitle: string;
-    deadline: string;
+    deadline?: string;
     taskImage: string;
     checked: boolean
 }

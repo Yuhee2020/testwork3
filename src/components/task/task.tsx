@@ -36,7 +36,7 @@ export const Task = ({task:{checked,taskId,taskImage,taskTitle,deadline}}: Props
                    onChange={handleCheckboxChange}
                    checked={checked}/>
             <EditablSpan title={taskTitle} changeTitle={changeTitle} />
-            <Deadline deadline={deadline} taskId={taskId}/>
+            <Deadline deadline={deadline? deadline:""} taskId={taskId}/>
             <TaskImage taskImage={taskImage} taskId={taskId}/>
             <IconButton onClick={handleDeleteClick}><DeleteIcon/></IconButton>
         </div>)
