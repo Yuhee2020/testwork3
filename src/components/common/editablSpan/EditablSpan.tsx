@@ -4,17 +4,17 @@ import {TextField, Tooltip} from "@mui/material";
 type PropsType = {
     title: string
     changeTitle: (title: string) => void
+    type?: string
 }
 
-export const EditablSpan = (props: PropsType) => {
-    console.log(props)
+export const EditablSpan = ({title, type, changeTitle}: PropsType) => {
     const [edit, setEdit] = useState(false)
-    const [newTitle, setNewTitle] = useState(props.title)
-    console.log(newTitle)
+    const [newTitle, setNewTitle] = useState(title)
+
 
     const setEditMode = () => {
         setEdit(!edit)
-        props.changeTitle(newTitle)
+        changeTitle(newTitle)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -23,6 +23,7 @@ export const EditablSpan = (props: PropsType) => {
 
     return edit
         ? <TextField
+            type={type}
             style={{width: "198px"}}
             onChange={(e) => setNewTitle(e.currentTarget.value)}
             value={newTitle}
@@ -32,5 +33,5 @@ export const EditablSpan = (props: PropsType) => {
             size='small'
             color='success'/>
         : (<Tooltip title="Double click to edit" placement={"left"} arrow><span
-            onDoubleClick={setEditMode}>{props.title}</span></Tooltip>)
+            onDoubleClick={setEditMode}>{title}</span></Tooltip>)
 };

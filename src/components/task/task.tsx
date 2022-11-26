@@ -1,17 +1,17 @@
 import React from "react";
 import {
-    addNewTask, changeTaskDeadLine,
+    changeTaskDeadLine,
     changeTaskStatus,
     changeTaskTitle,
-    changeTodolistTitle,
     deleteTask,
     TaskType
 } from "../../store/todolist-reducer";
 import {useAppDispatch} from "../../store/store";
-import {v1} from "uuid";
 import {EditablSpan} from "../common/editablSpan/EditablSpan";
 import {IconButton} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {TaskImage} from "./taskImage/taskImage";
+import {Deadline} from "./deadline/Deadline";
 
 type PropsType = {
     task: TaskType
@@ -29,18 +29,15 @@ export const Task = ({task:{checked,taskId,taskImage,taskTitle,deadline}}: Props
     const changeTitle=(taskTitle:string)=>{
         dispatch(changeTaskTitle({taskTitle, taskId}))
     }
-    const changeDeadline=(deadline:string)=>{
-        dispatch(changeTaskDeadLine({deadline, taskId}))
-    }
 
     return (
         <div key={taskId}>
             <input type="checkbox"
                    onChange={handleCheckboxChange}
                    checked={checked}/>
-            <EditablSpan title={taskTitle} changeTitle={changeTitle}/>
-            <EditablSpan title={deadline} changeTitle={changeDeadline}/>
-            {taskImage}
+            <EditablSpan title={taskTitle} changeTitle={changeTitle} />
+            <Deadline deadline={deadline} taskId={taskId}/>
+            <TaskImage taskImage={taskImage} taskId={taskId}/>
             <IconButton onClick={handleDeleteClick}><DeleteIcon/></IconButton>
         </div>)
 }

@@ -15,7 +15,7 @@ export const Todolist = () => {
         dispatch(changeTodolistTitle({title}))
     }
     const addTask=(taskTitle:string)=>{
-        dispatch(addNewTask({taskId: v1(), taskTitle, deadline: "2365898", taskImage: "image"}))
+        dispatch(addNewTask({taskTitle,}))
     }
 
     useEffect(() => {

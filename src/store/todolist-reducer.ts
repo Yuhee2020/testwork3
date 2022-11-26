@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {child, get, getDatabase, ref, set} from "firebase/database";
 import {StateType} from "./store";
 import {v1} from "uuid";
+import dayjs from "dayjs";
 
 
 const initialState = {
@@ -52,7 +53,7 @@ export const changeTodolistTitle = createAsyncThunk("todolist/changeTodolistTitl
     dispatch(postTodolist({todolist: newTodolist}))
 })
 
-export const addNewTask = createAsyncThunk("todolist/addNewTask", (params: TaskType, {
+export const addNewTask = createAsyncThunk("todolist/addNewTask", (params: { taskTitle:string }, {
     dispatch, getState
 }) => {
 
@@ -66,8 +67,8 @@ export const addNewTask = createAsyncThunk("todolist/addNewTask", (params: TaskT
             {
                 taskId: v1(),
                 taskTitle: params.taskTitle,
-                deadline: params.deadline,
-                taskImage: params.taskImage,
+                deadline: "Set deadline",
+                taskImage: "image",
                 checked: false
             },
             ...tasks,],
@@ -103,7 +104,6 @@ export const changeTaskTitle = createAsyncThunk("todolist/changeTaskTitle", (par
         tasks: tasks.map(task => task.taskId === params.taskId ? {...task, taskTitle: params.taskTitle} : task)
     }
     dispatch(postTodolist({todolist: newTodolist}))
-    console.log(newTodolist)
 })
 
 export const changeTaskDeadLine = createAsyncThunk("todolist/changeTaskDeadLine", (params: { deadline: string, taskId: string }, {
@@ -119,7 +119,6 @@ export const changeTaskDeadLine = createAsyncThunk("todolist/changeTaskDeadLine"
         tasks: tasks.map(task => task.taskId === params.taskId ? {...task, deadline: params.deadline} : task)
     }
     dispatch(postTodolist({todolist: newTodolist}))
-    console.log(newTodolist)
 })
 
 export const changeTaskImage = createAsyncThunk("todolist/changeTaskImage", (params: { taskImage: string, taskId: string }, {
@@ -135,7 +134,6 @@ export const changeTaskImage = createAsyncThunk("todolist/changeTaskImage", (par
         tasks: tasks.map(task => task.taskId === params.taskId ? {...task, taskImage: params.taskImage} : task)
     }
     dispatch(postTodolist({todolist: newTodolist}))
-    console.log(newTodolist)
 })
 
 export const changeTaskStatus = createAsyncThunk("todolist/changeTaskStatus", (params: { checked: boolean, taskId: string }, {
@@ -151,7 +149,6 @@ export const changeTaskStatus = createAsyncThunk("todolist/changeTaskStatus", (p
         tasks: tasks.map(task => task.taskId === params.taskId ? {...task, checked: params.checked} : task)
     }
     dispatch(postTodolist({todolist: newTodolist}))
-    console.log(newTodolist)
 })
 
 
@@ -181,6 +178,6 @@ export type TaskType = {
     taskId: string;
     taskTitle: string;
     deadline: string;
-    taskImage?: string;
-    checked?: boolean
+    taskImage: string;
+    checked: boolean
 }
