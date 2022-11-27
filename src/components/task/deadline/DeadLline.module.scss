@@ -1,3 +1,11 @@
 .deadline{
-  background-color: red;
+  cursor: pointer;
+  width: 25%;
+  text-align: center;
+}
+
+.isDeadline{
+  @extend .deadline;
+  color: red;
+  width: 25%;
 }

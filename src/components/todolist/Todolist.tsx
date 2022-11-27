@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {addNewTask, changeTodolistTitle, getTodolist} from "../../store/todolist-reducer";
 import {useAppDispatch, useAppSelector} from "../../store/store";
-import {Task} from "../task/task";
+import {Task} from "../task/Task";
 import {EditablSpan} from "../common/editablSpan/EditablSpan";
 import {AddItemForm} from "../common/addItemForm/AddItemForm";
-import {v1} from "uuid";
+import {Paper} from "@mui/material";
+import s from "./Todolist.module.scss"
 
 export const Todolist = () => {
 
@@ -14,26 +15,28 @@ export const Todolist = () => {
     const changeTitle = (title: string) => {
         dispatch(changeTodolistTitle({title}))
     }
-    const addTask=(taskTitle:string)=>{
+    const addTask = (taskTitle: string) => {
         dispatch(addNewTask({taskTitle,}))
     }
 
     useEffect(() => {
         dispatch(getTodolist())
-    }, [])
+    }, [dispatch])
 
-    if (!todolist.tasks) {
-        return <div>loading</div>
-    }
+
     return (
-        <div>
-            <EditablSpan title={todolist.todolistTitle} changeTitle={changeTitle}/>
+        <Paper elevation={10} className={s.todolist}>
+            <div className={s.todolistTitle}>
+                <EditablSpan
+                    title={todolist.todolistTitle}
+                    changeTitle={changeTitle}/>
+            </div>
             <AddItemForm label={"Enter task title"} addItem={addTask}/>
-            {todolist.tasks.map(task =>
-                <Task
-                    key={task.taskId}
-                    task={task}/>
-            )}
-        </div>
+                {todolist.tasks ? todolist.tasks.map(task =>
+                    <Task
+                        key={task.taskId}
+                        task={task}/>
+                ): <div>add new task please</div>}
+        </Paper>
     );
 };

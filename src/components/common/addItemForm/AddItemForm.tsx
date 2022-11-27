@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {IconButton, TextField} from "@mui/material";
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import s from "./addItemForm.module.scss"
 
 type PropsType = {
     addItem: (title: string) => void
@@ -28,8 +29,9 @@ export const AddItemForm = (props: PropsType) => {
     }
 
     return (
-        <div>
+        <div className={s.addItemForm}>
             <TextField
+                className={s.textField}
                 color='success'
                 onChange={onChangeHandler}
                 value={title}

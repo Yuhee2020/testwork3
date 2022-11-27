@@ -1,5 +1,5 @@
 import React, {KeyboardEvent, useState} from 'react';
-import {TextField} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 
 type PropsType = {
     changeTitle: (title: string) => void
@@ -30,6 +30,6 @@ export const EditableButton = ({changeTitle}: PropsType) => {
             onKeyPress={onKeyPressHandler}
             size='small'
             color='success'/>
-        : <button onClick={setEditMode}>Set deadline</button>
+        : <Button variant="outlined" color={"success"} onClick={setEditMode}>Set deadline</Button>
 };
 

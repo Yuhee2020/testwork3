@@ -19,11 +19,11 @@ export const Deadline = ({taskId, deadline}:PropsType) => {
     }
 
     if(!deadline){
-        return <EditableButton changeTitle={changeDeadline}/>
+        return <div className={s.deadline}><EditableButton changeTitle={changeDeadline}/></div>
     }
 
     return (
-        <div className={date>=deadline ? s.deadline : ""}>
+        <div className={date>= deadline ? s.isDeadline : s.deadline}>
             <EditablSpan type={"date"} title={deadline} changeTitle={changeDeadline}/>
         </div>
     );

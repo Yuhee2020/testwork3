@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {child, get, getDatabase, ref, set} from "firebase/database";
 import {StateType} from "./store";
 import {v1} from "uuid";
-import dayjs from "dayjs";
 
 
 const initialState = {
@@ -10,7 +9,7 @@ const initialState = {
 }
 
 
-export const getTodolist = createAsyncThunk("todolist/getTodolist", (params, {dispatch, rejectWithValue}) => {
+export const getTodolist = createAsyncThunk("todolist/getTodolist", (params, {dispatch}) => {
     const dbRef = ref(getDatabase());
     get(child(dbRef, `todolist/`)).then((snapshot) => {
         if (snapshot.exists()) {
@@ -24,8 +23,7 @@ export const getTodolist = createAsyncThunk("todolist/getTodolist", (params, {di
 })
 
 export const postTodolist = createAsyncThunk("todolist/postTodolist", (params: { todolist: TodolistType }, {
-    dispatch,
-    rejectWithValue
+    dispatch
 }) => {
     const db = getDatabase();
     set(ref(db, 'todolist/'), params.todolist)
@@ -53,12 +51,11 @@ export const changeTodolistTitle = createAsyncThunk("todolist/changeTodolistTitl
     dispatch(postTodolist({todolist: newTodolist}))
 })
 
-export const addNewTask = createAsyncThunk("todolist/addNewTask", (params: { taskTitle:string }, {
+export const addNewTask = createAsyncThunk("todolist/addNewTask", (params: { taskTitle: string }, {
     dispatch, getState
 }) => {
-
     const state = getState() as StateType
-    const {todolistTitle, todolistId, todolistImage, tasks} = state.todolist.todolist
+    const {todolistTitle, todolistId, todolistImage, tasks = []} = state.todolist.todolist
     const newTodolist = {
         todolistTitle,
         todolistId,
@@ -67,7 +64,7 @@ export const addNewTask = createAsyncThunk("todolist/addNewTask", (params: { tas
             {
                 taskId: v1(),
                 taskTitle: params.taskTitle,
-                taskImage: "image",
+                taskImage: "",
                 checked: false
             },
             ...tasks,],
