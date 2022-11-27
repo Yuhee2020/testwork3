@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {IconButton, TextField} from "@mui/material";
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import s from "./addItemForm.module.scss"
+import s from "./addItemForm.module.scss";
 
 type PropsType = {
     addItem: (title: string) => void

@@ -4,19 +4,12 @@ import {v1} from "uuid";
 import {StateType, TodolistType} from "./types";
 
 
-const initialState = {
-    todolist: {} as TodolistType
-}
-
+//AsyncThunks
 
 export const getTodolist = createAsyncThunk("todolist/getTodolist", (params, {dispatch}) => {
     const dbRef = ref(getDatabase());
     get(child(dbRef, `todolist/`)).then((snapshot) => {
-        if (snapshot.exists()) {
-            dispatch(setTodolist({todolist: snapshot.val()}))
-        } else {
-            console.log("No data available");
-        }
+        dispatch(setTodolist({todolist: snapshot.val()}))
     }).catch((error) => {
         console.error(error);
     });
@@ -29,7 +22,6 @@ export const postTodolist = createAsyncThunk("todolist/postTodolist", (params: {
     set(ref(db, 'todolist/'), params.todolist)
         .then(() => {
             dispatch(getTodolist())
-            console.log("Data saved successfully!")
         })
         .catch((error) => {
             console.error(error);
@@ -147,10 +139,10 @@ export const changeTaskStatus = createAsyncThunk("todolist/changeTaskStatus", (p
     dispatch(postTodolist({todolist: newTodolist}))
 })
 
-
+//Slice
 export const slice = createSlice({
     name: "todolist",
-    initialState,
+    initialState: {todolist: {} as TodolistType},
     reducers: {
         setTodolist(state, action: PayloadAction<{ todolist: TodolistType }>) {
             state.todolist = action.payload.todolist
@@ -158,8 +150,10 @@ export const slice = createSlice({
     }
 })
 
-
+//Reducer
 export const todolistReducer = slice.reducer
+
+// Actions
 export const {setTodolist} = slice.actions
 
 

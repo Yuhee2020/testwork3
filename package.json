@@ -1,6 +1,6 @@
 {
   "name": "testwork3",
-  "homepage":"https://Yuhee2020.github.io/testwork3",
+  "homepage": "https://Yuhee2020.github.io/testwork3",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/sass": "^1.43.1",
     "@types/uuid": "^8.3.4",
+    "better-docs": "^2.7.2",
     "dayjs": "^1.11.6",
     "firebase": "^9.14.0",
     "react": "^18.2.0",
@@ -40,7 +41,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "docs": "jsdoc -c jsdoc.conf.json"
   },
   "eslintConfig": {
     "extends": [
