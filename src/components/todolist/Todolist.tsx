@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {addNewTask, changeTodolistTitle, getTodolist} from "../../store/todolist-reducer";
-import {useAppDispatch, useAppSelector} from "../../store/store";
 import {Task} from "../task/Task";
 import {EditablSpan} from "../common/editablSpan/EditablSpan";
 import {AddItemForm} from "../common/addItemForm/AddItemForm";
 import {Paper} from "@mui/material";
 import s from "./Todolist.module.scss"
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 
 export const Todolist = () => {
 

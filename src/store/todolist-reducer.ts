@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {child, get, getDatabase, ref, set} from "firebase/database";
-import {StateType} from "./store";
 import {v1} from "uuid";
+import {StateType, TodolistType} from "./types";
 
 
 const initialState = {
@@ -163,17 +163,3 @@ export const todolistReducer = slice.reducer
 export const {setTodolist} = slice.actions
 
 
-export type TodolistType = {
-    todolistTitle: string;
-    todolistId: string;
-    todolistImage: string;
-    tasks: TaskType[];
-}
-
-export type TaskType = {
-    taskId: string;
-    taskTitle: string;
-    deadline?: string;
-    taskImage: string;
-    checked: boolean
-}

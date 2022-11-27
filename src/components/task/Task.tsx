@@ -1,12 +1,13 @@
 import React from "react";
-import {changeTaskStatus, changeTaskTitle, deleteTask, TaskType} from "../../store/todolist-reducer";
-import {useAppDispatch} from "../../store/store";
+import {changeTaskStatus, changeTaskTitle, deleteTask} from "../../store/todolist-reducer";
 import {EditablSpan} from "../common/editablSpan/EditablSpan";
 import {Checkbox, IconButton} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {TaskImage} from "./taskImage/TaskImage";
 import {Deadline} from "./deadline/Deadline";
 import s from "./Task.module.scss"
+import {TaskType} from "../../store/types";
+import {useAppDispatch} from "../../hooks/hooks";
 
 type PropsType = {
     task: TaskType

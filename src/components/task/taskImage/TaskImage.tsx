@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import {Button, Tooltip} from "@mui/material";
-import {useAppDispatch} from "../../../store/store";
 import {convertFileToBase64} from "../../../utils/base64Converter";
 import {changeTaskImage} from "../../../store/todolist-reducer";
 import s from "./TaskImage.module.scss"
 import noImage from "../../../images/no-image-icon.png"
+import {useAppDispatch} from "../../../hooks/hooks";
 
 type PropsType = {
     taskImage: string

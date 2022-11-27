@@ -1,10 +1,10 @@
 import React from 'react';
 import {EditablSpan} from "../../common/editablSpan/EditablSpan";
 import {changeTaskDeadLine} from "../../../store/todolist-reducer";
-import {useAppDispatch} from "../../../store/store";
 import dayjs from "dayjs";
 import s from './DeadLline.module.scss'
 import {EditableButton} from "../../common/editableButton/editableButton";
+import {useAppDispatch} from "../../../hooks/hooks";
 
 type PropsType={
     taskId:string
